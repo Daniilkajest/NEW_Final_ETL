@@ -1,0 +1,37 @@
+[2026-03-10T20:52:40.875+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: mongodb_to_postgres_etl.create_mart_popular_actions manual__2026-03-10T20:52:38.437548+00:00 [queued]>
+[2026-03-10T20:52:40.882+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: mongodb_to_postgres_etl.create_mart_popular_actions manual__2026-03-10T20:52:38.437548+00:00 [queued]>
+[2026-03-10T20:52:40.883+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-10T20:52:40.893+0000] {taskinstance.py:2191} INFO - Executing <Task(PostgresOperator): create_mart_popular_actions> on 2026-03-10 20:52:38.437548+00:00
+[2026-03-10T20:52:40.898+0000] {standard_task_runner.py:60} INFO - Started process 288 to run task
+[2026-03-10T20:52:40.902+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'mongodb_to_postgres_etl', 'create_mart_popular_actions', 'manual__2026-03-10T20:52:38.437548+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/mongo_to_pg_dag.py', '--cfg-path', '/tmp/tmp_5iijw8f']
+[2026-03-10T20:52:40.904+0000] {standard_task_runner.py:88} INFO - Job 5: Subtask create_mart_popular_actions
+[2026-03-10T20:52:40.960+0000] {task_command.py:423} INFO - Running <TaskInstance: mongodb_to_postgres_etl.create_mart_popular_actions manual__2026-03-10T20:52:38.437548+00:00 [running]> on host 30c692f694c3
+[2026-03-10T20:52:41.022+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='s.tyurin' AIRFLOW_CTX_DAG_ID='mongodb_to_postgres_etl' AIRFLOW_CTX_TASK_ID='create_mart_popular_actions' AIRFLOW_CTX_EXECUTION_DATE='2026-03-10T20:52:38.437548+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-10T20:52:38.437548+00:00'
+[2026-03-10T20:52:41.023+0000] {sql.py:276} INFO - Executing: 
+            DROP TABLE IF EXISTS marts.dm_popular_actions;
+            CREATE TABLE marts.dm_popular_actions AS
+            SELECT 
+                action,
+                COUNT(*) as action_count
+            FROM ods.user_sessions, 
+            UNNEST(actions) AS action
+            GROUP BY action
+            ORDER BY action_count DESC;
+        
+[2026-03-10T20:52:41.030+0000] {base.py:83} INFO - Using connection ID 'postgres_default' for task execution.
+[2026-03-10T20:52:41.040+0000] {base.py:83} INFO - Using connection ID 'postgres_default' for task execution.
+[2026-03-10T20:52:41.046+0000] {sql.py:450} INFO - Running statement: 
+            DROP TABLE IF EXISTS marts.dm_popular_actions;
+            CREATE TABLE marts.dm_popular_actions AS
+            SELECT 
+                action,
+                COUNT(*) as action_count
+            FROM ods.user_sessions, 
+            UNNEST(actions) AS action
+            GROUP BY action
+            ORDER BY action_count DESC;
+        , parameters: None
+[2026-03-10T20:52:41.061+0000] {sql.py:459} INFO - Rows affected: 4
+[2026-03-10T20:52:41.070+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=mongodb_to_postgres_etl, task_id=create_mart_popular_actions, execution_date=20260310T205238, start_date=20260310T205240, end_date=20260310T205241
+[2026-03-10T20:52:41.115+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-10T20:52:41.136+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
