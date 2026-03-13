@@ -28,7 +28,7 @@ def flatten_json():
 # 2. Функция обработки XML
 def flatten_xml():
     # сырой xml
-    xml_url = 'https://gist.githubusercontent.com/pamelafox/3000322/raw/4bd276bf656b26ddf647c2115ec661bc1d3d63b0/nutrition.xml'
+    xml_url = 'https://gist.githubusercontent.com/pamelafox/3000322/raw/nutrition.xml'
     
     response = requests.get(xml_url)
     root = ET.fromstring(response.content)
